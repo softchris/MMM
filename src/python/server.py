@@ -17,6 +17,49 @@ items_path = os.path.join(os.path.dirname(__file__), '../assets/items.json')
 # Create an MCP server for the mystery game
 mcp = FastMCP("MMM Mystery Game")
 
+current_room = "Study" # Default starting room
+
+# Load room order from rooms.json
+rooms_path = os.path.join(os.path.dirname(__file__), '../assets/rooms.json')
+try:
+    with open(rooms_path, 'r') as f:
+        ROOMS = [r['name'] for r in json.load(f)]
+except Exception:
+    ROOMS = []
+
+# Tool to move forward in rooms
+@mcp.tool()
+def move_forward() -> str:
+    global current_room
+    if current_room not in ROOMS:
+        current_room = ROOMS[0] if ROOMS else ""
+        return f"Moved to {current_room}."
+    idx = ROOMS.index(current_room)
+    if idx < len(ROOMS) - 1:
+        current_room = ROOMS[idx + 1]
+        return f"Moved forward to {current_room}."
+    else:
+        return f"Already at the last room: {current_room}."
+
+@mcp.tool()
+def current_room_name() -> str:
+    """Return the name of the current room."""
+    return current_room
+
+# Tool to move backward in rooms
+@mcp.tool()
+def move_backward() -> str:
+    global current_room
+    if current_room not in ROOMS:
+        current_room = ROOMS[0] if ROOMS else ""
+        return f"Moved to {current_room}."
+    idx = ROOMS.index(current_room)
+    if idx > 0:
+        current_room = ROOMS[idx - 1]
+        return f"Moved backward to {current_room}."
+    else:
+        return f"Already at the first room: {current_room}."
+
 # Game Actions as MCP tools
 @mcp.resource("look://{room}")
 def search_room(room: str) -> str:
@@ -65,6 +108,8 @@ def analyze_item(item: str) -> str:
     except Exception as e:
         return f"Error reading items: {e}"
     return "No significant findings."
+
+
 
 @mcp.tool()
 def confront_character(name: str) -> str:

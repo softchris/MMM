@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"my-mcp-server-c9913e11": {
+			"type": "stdio",
+			"command": "python",
+			"args": ["/workspaces/MMM/src/python/server.py"]
+		}
+	},
+	"inputs": []
+}

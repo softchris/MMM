@@ -47,6 +47,12 @@ async def run():
             resource_content = await session.read_resource(AnyUrl("look://Study"))
             content_block = resource_content.contents[0]
             print(content_block.text)
+
+            # Analyze items in the current room
+            print("Reading resource content...")
+            resource_content = await session.read_resource(AnyUrl("lookat://LeatherGloves"))
+            content_block = resource_content.contents[0]
+            print(content_block.text)
             
 
             # Call a tool (add tool from fastmcp_quickstart)

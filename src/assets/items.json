@@ -1,26 +1,31 @@
 [
     {
-        "name": "Letter Opener",
+        "id": 1,
+        "name": "LetterOpener",
         "description": "Sharp silver blade with an ivory handle.",
         "location": "Study"
     },
     {
+        "id": 2,
         "name": "Paperweight",
         "description": "Marble sphere, surprisingly heavy.",
         "location": "Study"
     },
     {
-        "name": "Leather Gloves",
+        "id": 3,
+        "name": "LeatherGloves",
         "description": "Soft black gloves, slightly worn.",
         "location": "Library"
     },
     {
-        "name": "Champagne Bottle",
+        "id": 4,
+        "name": "ChampagneBottle",
         "description": "Heavy glass bottle, unopened.",
         "location": "Cellar"
     },
     {
-        "name": "Opera Glasses",
+        "id": 5,
+        "name": "OperaGlasses",
         "description": "Small binoculars with mother-of-pearl inlay.",
         "location": "Ballroom"
     }

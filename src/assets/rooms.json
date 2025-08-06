@@ -1,8 +1,31 @@
 [
-  {"name": "Study", "description": "crime scene"},
-  {"name": "Library", "description": "clues"},
-  {"name": "Conservatory", "description": "secret meetings"},
-  {"name": "Cellar", "description": "hidden passage"},
-  {"name": "Ballroom", "description": "alibis"},
-  {"name": "Servants’ Quarters", "description": "eavesdropping"}
+  {
+    "name": "Study",
+    "description": "The crime scene, filled with scattered papers and overturned furniture, where the mystery began.",
+    "url": "/assets/study.png"
+  },
+  {
+    "name": "Library",
+    "description": "A quiet room lined with shelves of dusty books, hiding subtle clues among its volumes."
+  },
+  {
+    "name": "Conservatory",
+    "description": "A sunlit space with exotic plants, often used for secret meetings away from prying eyes.",
+    "url": "/assets/conservatory.png"
+  },
+  {
+    "name": "Cellar",
+    "description": "A dark, damp area beneath the house, rumored to contain a hidden passage and secrets long buried.",
+    "url": "/assets/cellar.png"
+  },
+  {
+    "name": "Ballroom",
+    "description": "An elegant hall where guests danced and mingled, providing many alibis and opportunities for intrigue.",
+    "url": "/assets/ballroom.png"
+  },
+  {
+    "name": "Servants’ Quarters",
+    "description": "A modest section of the house where staff reside, known for eavesdropping and overheard conversations.",
+    "url": "/assets/servants_quarters.png"
+  }
 ]

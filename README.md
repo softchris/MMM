@@ -42,3 +42,10 @@ take_action("Confront Madeleine Rousseau");
 
 MCP Context Protocol: Each clue updates the context window. You must manage context size and relevance to avoid losing critical information.
 
+## TODO 
+
+- figure out how to play this... you can walk through all rooms, inspect any items
+- interrogate, should get characters to tell their clue
+- accuse, should take character + item as input, the right combination should get the killer to confess (if they are guilty, otherwise deny)
+   o if wrong combination, then tell their secret
+- characters should answer with LLM responses
