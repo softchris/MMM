@@ -42,6 +42,33 @@ take_action("Confront Madeleine Rousseau");
 
 MCP Context Protocol: Each clue updates the context window. You must manage context size and relevance to avoid losing critical information.
 
+## playing it
+
+**Via VS Code**
+
+```json
+"my-mcp-server-c9913e11": {
+    "type": "stdio",
+    "command": "python",
+    "args": ["/workspaces/MMM/src/python/server.py"]
+}
+```
+
+**Using the client**
+
+```sh
+cd src/python/server.py
+python client.py
+```
+
+**Website**
+
+Start `index.html` in `/src`
+
+
+TIP: you might need to install "mcp[cli]".
+
+
 ## TODO 
 
 - figure out how to play this... you can walk through all rooms, inspect any items
