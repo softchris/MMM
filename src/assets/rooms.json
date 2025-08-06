@@ -1,0 +1,8 @@
+[
+  {"name": "Study", "description": "crime scene"},
+  {"name": "Library", "description": "clues"},
+  {"name": "Conservatory", "description": "secret meetings"},
+  {"name": "Cellar", "description": "hidden passage"},
+  {"name": "Ballroom", "description": "alibis"},
+  {"name": "Servants’ Quarters", "description": "eavesdropping"}
+]

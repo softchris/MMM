@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Éloise Moreau",
+    "role": "Lucien’s wife, elegant and composed.",
+    "motive": "Lucien was planning to leave her for a younger woman. She also feared losing her status and wealth.",
+    "secret": "She has a hidden lover and a forged will.",
+    "location": "Ballroom"
+  },
+  {
+    "name": "Henri Duval",
+    "role": "Lucien’s professional nemesis.",
+    "motive": "Lucien stole credit for Henri’s discoveries and ruined his reputation.",
+    "secret": "He was seen near the study before the murder and has knowledge of rare poisons.",
+    "location": "Study"
+  },
+  {
+    "name": "Madeleine Rousseau",
+    "role": "Loyal servant with a mysterious past.",
+    "motive": "Lucien discovered her true identity—an escaped convict.",
+    "secret": "She has access to all rooms and overheard many secrets.",
+    "location": "Servants’ Quarters"
+  },
+  {
+    "name": "Julien Armand",
+    "role": "Lucien’s apprentice.",
+    "motive": "Lucien was about to cut him out of a lucrative artifact deal.",
+    "secret": "He has debts and was desperate for money.",
+    "location": "Library"
+  },
+  {
+    "name": "Margaux Lefevre",
+    "role": "Guest and mystic advisor.",
+    "motive": "Lucien mocked her beliefs and stole a cursed artifact.",
+    "secret": "She believes the murder was foretold and may be manipulating others.",
+    "location": "Conservatory"
+  }
+]
