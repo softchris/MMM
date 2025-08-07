@@ -7,6 +7,7 @@ MMM MCP Server: Implements game actions as MCP tools.
 import os
 import json
 from mcp.server.fastmcp import FastMCP
+from character import get_character
 
 items_path = os.path.join(os.path.dirname(__file__), '../assets/items.json')
  # Load characters
@@ -30,6 +31,7 @@ except Exception:
 # Tool to move forward in rooms
 @mcp.tool()
 def move_forward() -> str:
+    """Move to the next room in the game."""
     global current_room
     if current_room not in ROOMS:
         current_room = ROOMS[0] if ROOMS else ""
@@ -49,6 +51,7 @@ def current_room_name() -> str:
 # Tool to move backward in rooms
 @mcp.tool()
 def move_backward() -> str:
+    """Move to the previous room in the game."""
     global current_room
     if current_room not in ROOMS:
         current_room = ROOMS[0] if ROOMS else ""
@@ -59,6 +62,13 @@ def move_backward() -> str:
         return f"Moved backward to {current_room}."
     else:
         return f"Already at the first room: {current_room}."
+
+# Add interrogation tool
+@mcp.tool()
+def talk_to_character(name: str) -> str:
+   """Interrogate a character for information."""
+   c = get_character(name)
+   return f"{c['name']} with {c.get('role', '')} {c.get('tone', 'neutral')} with secret {c.get('secret', '')}"
 
 # Game Actions as MCP tools
 @mcp.resource("look://{room}")
