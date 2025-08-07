@@ -1,0 +1,155 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background: url('assets/bg.png') no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Cinzel', serif;
+	color: #eaeaea;
+	text-shadow: 2px 2px 8px #000;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: rgba(20, 20, 20, 0.7);
+	box-shadow: 0 0 40px 10px #000 inset;
+	padding-top: 50px;
+}
+/* Two column layout for game area */
+
+#game-area {
+	text-align: center;
+}
+
+#room_image {
+	position: relative;
+}
+
+#character-img {
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    object-fit: cover;
+	border: solid 2px orange;
+}
+
+ #item-img {
+	position: absolute;
+    bottom: 46px;
+    right: 0;
+    width: 60px;
+    object-fit: cover;
+	border: solid 2px orange;
+}
+
+#room-desc {
+	height: 250px;
+}
+
+ #character-img:hover,  #item-img:hover {
+	transform: scale(1.1);
+	box-shadow: 0 0 10px orange;
+}
+
+#character-modal {
+	    box-shadow: 0 0 20px orange;
+}
+
+.room-image {
+	width: 480px;
+	height: 320px;
+	object-fit: cover;
+	border: 6px solid #222;
+	box-shadow: 0 0 30px 10px #111;
+	margin-bottom: 24px;
+}
+.room-description {
+	font-size: smaller;
+    line-height: 169%;
+    font-style: italic;
+	background: rgba(40, 40, 40, 0.8);
+	padding: 18px 32px;
+	border-radius: 12px;
+	margin-bottom: 24px;
+	max-width: 600px;
+	box-shadow: 0 0 20px 5px #111;
+}
+.chat {
+	
+	max-height: 300px;
+	overflow-y: auto;
+	background: rgba(30, 30, 30, 0.85);
+	border-radius: 10px;
+	box-shadow: 0 0 20px 5px #111;
+	padding: 16px;
+	margin-bottom: 16px;
+}
+.chat-input {
+	width: 500px;
+	padding: 12px;
+	border-radius: 8px;
+	border: none;
+	background: #222;
+	color: #eaeaea;
+	font-size: 1em;
+	box-shadow: 0 0 10px 2px #111;
+}
+.chat-input:focus {
+	outline: 2px solid #eaeaea;
+}
+.spooky {
+	font-family: 'Creepster', cursive;
+	font-size: 2.5em;
+	color: #ff2e63;
+	text-shadow: 0 0 20px #000, 0 0 10px #ff2e63;
+	
+}
+.subtitle {
+	font-size: 1.5em;
+	color: #eaeaea;
+	text-shadow: 0 0 10px #ff2e63;
+	margin-bottom: 30px;
+	font-family: 'Cinzel', serif;
+}
+.room-image-wrapper {
+	position: relative;
+	display: inline-block;
+}
+.play-btn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	background: radial-gradient(circle at 60% 40%, #ff2e63 80%, #111 100%);
+	border: 6px solid #222;
+	box-shadow: 0 0 40px 10px #ff2e63, 0 0 20px 5px #111 inset;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4em;
+	color: #fff;
+	cursor: pointer;
+	transition: transform 0.2s;
+	z-index: 2;
+}
+.play-btn:hover {
+	transform: translate(-50%, -60%) scale(1.08);
+}
+.step-in {
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 2em;
+	color: #eaeaea;
+	text-shadow: 0 0 10px #ff2e63;
+	font-family: 'Cinzel', serif;
+	z-index: 2;
+}
