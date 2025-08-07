@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Murder Mystery Mansion</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+            background: url('assets/bg.png') no-repeat center center fixed;
+            
+			background-size: cover;
+			font-family: 'Cinzel', serif;
+			color: #eaeaea;
+			text-shadow: 2px 2px 8px #000;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			background: rgba(20, 20, 20, 0.7);
+			box-shadow: 0 0 40px 10px #000 inset;
+		}
+		.room-image {
+			width: 480px;
+			height: 320px;
+			object-fit: cover;
+			border: 6px solid #222;
+			box-shadow: 0 0 30px 10px #111;
+			margin-bottom: 24px;
+		}
+		.room-description {
+			font-size: 1.3em;
+			background: rgba(40, 40, 40, 0.8);
+			padding: 18px 32px;
+			border-radius: 12px;
+			margin-bottom: 24px;
+			max-width: 600px;
+			box-shadow: 0 0 20px 5px #111;
+		}
+		.chat {
+			width: 500px;
+			max-height: 300px;
+			overflow-y: auto;
+			background: rgba(30, 30, 30, 0.85);
+			border-radius: 10px;
+			box-shadow: 0 0 20px 5px #111;
+			padding: 16px;
+			margin-bottom: 16px;
+		}
+		.chat-input {
+			width: 500px;
+			padding: 12px;
+			border-radius: 8px;
+			border: none;
+			background: #222;
+			color: #eaeaea;
+			font-size: 1em;
+			box-shadow: 0 0 10px 2px #111;
+		}
+		.chat-input:focus {
+			outline: 2px solid #eaeaea;
+		}
+		.spooky {
+			font-family: 'Creepster', cursive;
+			font-size: 2.5em;
+			color: #ff2e63;
+			text-shadow: 0 0 20px #000, 0 0 10px #ff2e63;
+			margin-bottom: 18px;
+		}
+	</style>
+	<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+	<div class="container">
+            <div class="spooky">Murder Mystery Mansion</div>
+            <div class="">An MCP Adventure</div>
+			<div style="position: relative; display: inline-block;">
+
+				<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img">
+				<button id="play-btn" style="
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -60%);
+					width: 160px;
+					height: 160px;
+					border-radius: 50%;
+					background: radial-gradient(circle at 60% 40%, #ff2e63 80%, #111 100%);
+					border: 6px solid #222;
+					box-shadow: 0 0 40px 10px #ff2e63, 0 0 20px 5px #111 inset;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 4em;
+					color: #fff;
+					cursor: pointer;
+					transition: transform 0.2s;
+					z-index: 2;
+				"
+				onmouseover="this.style.transform='translate(-50%, -60%) scale(1.08)'" onmouseout="this.style.transform='translate(-50%, -60%) scale(1)'">
+					▶
+				</button>
+				<div style="
+					position: absolute;
+					top: 70%;
+					left: 50%;
+					transform: translate(-50%, 0);
+					font-size: 2em;
+					color: #eaeaea;
+					text-shadow: 0 0 10px #ff2e63;
+					font-family: 'Cinzel', serif;
+					z-index: 2;
+				">step in</div>
+			</div>
+	
+		<div class="room-description" id="room-desc">
+			The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.
+		</div>
+		<div class="chat" id="chat-box">
+			<div><strong>Henri Duval:</strong> The truth is buried deeper than you think, Inspector...</div>
+			<div><strong>Margaux Lefevre:</strong> Beware the curse that lingers in these halls...</div>
+		</div>
+		<input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+	</div>
+	<script>
+		// Simple spooky effect for chat
+		const chatInput = document.getElementById('chat-input');
+		const chatBox = document.getElementById('chat-box');
+		chatInput.addEventListener('keydown', function(e) {
+			if (e.key === 'Enter' && chatInput.value.trim()) {
+				const msg = document.createElement('div');
+				msg.innerHTML = `<strong>You:</strong> ${chatInput.value}`;
+				chatBox.appendChild(msg);
+				chatBox.scrollTop = chatBox.scrollHeight;
+				chatInput.value = '';
+			}
+		});
+	</script>
+</body>
+</html>
