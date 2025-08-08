@@ -3,6 +3,44 @@ function getElementId(id) {
     return document.getElementById(id);
 }
 
+BASE_URL = "https://orange-funicular-w5j94w7x7wh6v4-5000.app.github.dev"
+
+let ROOMS = [];
+
+
+async function interrogateCharacter() {
+    try {
+        const response = await fetch(`${BASE_URL}/interrogate`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: ROOMS[currentRoom]["characterName"] })
+        });
+        const data = await response.json();
+        
+        return data.response;
+    } catch (error) {
+        console.error("Error interrogating character:", error);
+    }
+}
+
+async function fetch_rooms() {
+    try {
+        const response = await fetch(`${BASE_URL}/rooms`);
+        const data = await response.json();
+        return data.rooms;
+        // You can use the data here to update the UI or perform other actions
+    } catch (error) {
+        console.error("Error fetching rooms data:", error);
+    }
+}
+
+// Utility to get element by class name
+function getElementClass(className) {
+    return document.getElementsByClassName(className)[0];
+}
+
 // Constants for element IDs
 const IDS = {
     CHAT_INPUT: 'chat-input',
@@ -11,7 +49,10 @@ const IDS = {
     ROOM_DESC: 'room-desc',
     RIGHT_COLUMN: 'right-column',
     START: 'start',
-    GAME_AREA: 'game-area'
+    GAME_AREA: 'game-area',
+    CHARACTER_IMG: 'character-img',
+    MODAL_CHAT: 'modal-chat',
+    INTERROGATE_BTN: 'interrogate-btn'
 };
 
 /**
@@ -36,9 +77,22 @@ function createChatHandler(chatInput, chatBox) {
  */
 function setupChat(inputId, boxId) {
     const chatInput = getElementId(inputId);
+    const interrogateBtn = getElementId(IDS.INTERROGATE_BTN);
+    const chatArea = getElementId(IDS.MODAL_CHAT);
     const chatBox = getElementId(boxId);
     if (chatInput && chatBox) {
         chatInput.addEventListener('keydown', createChatHandler(chatInput, chatBox));
+    }
+
+    if(interrogateBtn) {
+        interrogateBtn.addEventListener('click', async function() {
+            const spinner = getElementId('spinner');
+            if (spinner) spinner.style.display = 'block';
+            const response = await interrogateCharacter();
+            if (spinner) spinner.style.display = 'none';
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Interrogation: `+ response);
+            // send interrogate to API, render response in chat area
+        });
     }
 }
 
@@ -56,7 +110,7 @@ function setupPlayButton(playBtnId, rightColumnId) {
             playArea.style.display = 'none';
             gameArea.style.display = 'block';
             // it doesn't show until after we clicked play
-            setupCharacterClicks(IDS.CHAT_BOX);
+            setupCharacterClicks(IDS.CHARACTER_IMG);
         });
     }
 }
@@ -93,33 +147,30 @@ function setupCharacterClicks(chatBoxId) {
     }
 }
 
-// Room data for navigation
-const ROOMS = [
-    {
-        img: '/assets/study.png',
-        desc: 'The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.'
-    },
-    {
-        img: '/assets/library.png',
-        desc: 'The library is lined with ancient tomes. A broken window lets in a cold draft. Something rustles behind the shelves.'
-    },
-    {
-        img: '/assets/hall.png',
-        desc: 'The grand hall echoes with distant footsteps. Portraits stare down from the walls, their eyes following your every move.'
-    }
-];
 let currentRoom = 0;
+
+function createChatMessage(message) {
+    return `<div class="chat-message">${message}</div>`;
+}
 
 function updateRoom() {
     const roomImg = document.getElementById('room-img');
     const roomDesc = document.getElementById('room-desc');
+    const roomTitle = document.getElementById('room-title');
+    const modalChat = document.getElementById(IDS.MODAL_CHAT);
     if (roomImg && roomDesc) {
         // Fade out
         roomImg.style.transition = 'opacity 0.2s';
         roomImg.style.opacity = '0';
         setTimeout(() => {
-            roomImg.src = ROOMS[currentRoom].img;
-            roomDesc.textContent = ROOMS[currentRoom].desc;
+
+            let room = ROOMS[currentRoom];
+            roomImg.src = ROOMS[currentRoom]["img"];
+            roomDesc.textContent = ROOMS[currentRoom]["desc"];
+            roomTitle.textContent = ROOMS[currentRoom]["title"];
+            modalChat.textContent = "";
+            modalChat.innerHTML = createChatMessage(`Hi, I'm ${ROOMS[currentRoom]["characterName"]}`);
+
             // Fade in after image loads
             roomImg.onload = function() {
                 roomImg.style.opacity = '1';
@@ -152,7 +203,8 @@ function setupRoomNavigation() {
 /**
  * Main setup function for all UI logic.
  */
-function setupUI() {
+async function setupUI() {
+    ROOMS = await fetch_rooms();
     setupChat(IDS.CHAT_INPUT, IDS.CHAT_BOX);
     setupPlayButton(IDS.PLAY_BTN, IDS.RIGHT_COLUMN);
     setupRoomNavigation();

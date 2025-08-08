@@ -37,6 +37,23 @@ body {
 	border: solid 2px orange;
 }
 
+button {
+	background: black;
+    color: white;
+    border-radius: 10px;
+}
+
+button:hover {
+	box-shadow: 0 0 10px yellow;
+}
+
+.chat-message {
+	box-shadow: 0 0 10px yellow;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
  #item-img {
 	position: absolute;
     bottom: 46px;

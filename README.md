@@ -72,10 +72,15 @@ TIP: you might need to install "mcp[cli]".
 ## TODO 
 
 - modal broken, needs fixing
-- todo: call the api, display character dialogue
-- todo, room info, should come from mcp server
+
 - todo: item info, should be resource call
-- todo: generally make it dynamic and data driven
+- todo: make sure the room structure comes from json file only
+- todo: accuse button, accuse person with item, if correct, they confess
+if incorrect, they will give angry response
+items can only be selected from list
+todo: display clue, for a room if character has a clue
+
+  o should keep track of items we discover per room
 
 - accuse, should take character + item as input, the right combination should get the killer to confess (if they are guilty, otherwise deny)
    o if wrong combination, then tell their secret

@@ -5,6 +5,7 @@ cd to the `examples/snippets/clients` directory and run:
 
 import asyncio
 import os
+import json
 
 from pydantic import AnyUrl
 
@@ -13,6 +14,7 @@ from mcp.client.stdio import stdio_client
 from mcp.shared.context import RequestContext
 from llm import call_llm
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 # Create server parameters for stdio connection
 server_params = StdioServerParameters(
@@ -82,6 +84,42 @@ async def run():
 
 app = Flask(__name__)
 
+ROOMS = [
+    {
+        "title": 'Study',
+        "img": '/assets/study.png',
+        "desc": 'The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.',
+        "characterName": 'Margaux Lefevre'
+    },
+    {
+        "title": 'Library',
+        "img": '/assets/library.png',
+        "desc": 'The library is lined with ancient tomes. A broken window lets in a cold draft. Something rustles behind the shelves.',
+        "characterName": 'Madeleine Rousseau'
+    },
+    {
+        "title": 'Hall',
+        "img": '/assets/hall.png',
+        "desc": 'The grand hall echoes with distant footsteps. Portraits stare down from the walls, their eyes following your every move.',
+        "characterName": 'Julien Armand'
+    }
+]
+
+CORS(app)
+
+@app.route("/rooms")
+async def rooms():
+    return jsonify({"status": "ok", "rooms": ROOMS})    
+
+from flask import request
+
+@app.route("/interrogate", methods=["POST"])
+async def interrogate():
+    data = request.get_json()
+    name = data.get("name") if data else None
+    r = await run_tool("talk_to_character", {"name": name})
+    return jsonify({"status": "ok", "response": r})
+
 @app.route("/status")
 async def status():
     r = await run_tool("talk_to_character", {"name": "Henri Duval"})
@@ -99,4 +137,4 @@ async def main():
 
 if __name__ == "__main__":
     # asyncio.run(main())
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

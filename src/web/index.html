@@ -20,15 +20,28 @@
 			<div class="step-in">step in</div>
 		</div>
 
+		<div id="spinner" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2000;">
+			<div style="width:64px; height:64px; border:8px solid #ccc; border-top:8px solid #222; border-radius:50%; animation:spin 1s linear infinite;"></div>
+		</div>
+		<style>
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		</style>
 		<div id="game-area" style="display:none;">
 			<div id="room_image" class="room-image-wrapper" style="position:relative;">
 				<button id="left-arrow" style="position:absolute; left:-48px; top:50%; transform:translateY(-50%); background:#222; color:#fff; border-radius:50%; width:40px; height:40px; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8592;</button>
+				
 				<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img">
 				<button id="right-arrow" style="position:absolute; right:-48px; top:50%; transform:translateY(-50%); background:#222; color:#fff; border-radius:50%; width:40px; height:40px; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8594;</button>
 				<div style="margin-top:16px; display:flex; gap:24px; justify-content:center;">
 					<img id="character-img" src="/assets/MargauxLefevre.png" alt="Character" >
 					<img id="item-img" src="/assets/binoculars.png" alt="Item">
 				</div>
+			</div>
+			<div>
+				<h2 id="room-title">Study</h2>
 			</div>
 			<div class="room-description" id="room-desc">
 				The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.
@@ -44,7 +57,8 @@
 
 			</div>
 			<input type="text" class="modal-chat-input" id="modal-chat-input" placeholder="Type your message..." style="width:100%; padding:12px; border-radius:8px; border:none; background:#222; color:#eaeaea; font-size:1em; box-shadow:0 0 10px 2px #111; margin-bottom:8px;">
-			<button class="submit" style="margin-top:8px; padding:8px 24px;">Save</button>
+			<button class="submit" style="margin-top:8px; padding:8px 24px;">Say</button>
+			<button id="interrogate-btn" class="submit" style="margin-top:8px; padding:8px 24px;">Interrogate</button>
 			<button class="close-modal" style="margin-top:8px; padding:8px 24px;">Close</button>
 		</div>
 	<script src="scripts.js"></script>
