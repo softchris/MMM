@@ -67,7 +67,9 @@ const IDS = {
     GAME_AREA: 'game-area',
     CHARACTER_IMG: 'character-img',
     MODAL_CHAT: 'modal-chat',
-    INTERROGATE_BTN: 'interrogate-btn'
+    INTERROGATE_BTN: 'interrogate-btn',
+    CHAT_AREA: 'chat-area',
+    ROOM: 'room'
 };
 
 /**
@@ -134,12 +136,15 @@ function setupPlayButton(playBtnId, rightColumnId) {
     const playBtn = getElementId(playBtnId);
     const playArea = getElementId(IDS.START);
     const gameArea = getElementId(IDS.GAME_AREA);
-
+    const chatArea = getElementId(IDS.CHAT_AREA);
+    const room = getElementId(IDS.ROOM);
 
     if (playBtn) {
         playBtn.addEventListener('click', function() {
             playArea.style.display = 'none';
-            gameArea.style.display = 'block';
+            gameArea.style.display = 'flex';
+            chatArea.style.display = 'block';
+            room.style.display = 'block';
             // it doesn't show until after we clicked play
             setupCharacterClicks(IDS.CHARACTER_IMG);
         });

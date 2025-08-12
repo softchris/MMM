@@ -12,8 +12,10 @@
 <body>
     
 	<div class="container">
-		<div class="spooky">Murder Mystery Mansion</div>
-		<div class="subtitle">An MCP Adventure</div>
+		<div class="title">
+			<div class="spooky">Murder Mystery Mansion</div>
+			<div class="subtitle">An MCP Adventure</div>
+		</div>
 		<div id="start" class="room-image-wrapper">
 			<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img-intro">
 			<button id="play-btn" class="play-btn">▶</button>
@@ -29,29 +31,32 @@
 			100% { transform: rotate(360deg); }
 		}
 		</style>
+		<button id="left-arrow" style="position:absolute; left:0px; top:50%; transform:translateY(-50%); background:#222; color:#fff;  width:40px; height:100vh; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8592;</button>
+		<button id="right-arrow" style="position:absolute; right:0px; top:50%; transform:translateY(-50%); background:#222; color:#fff; width:40px; height:100vh; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8594;</button>
+
 		<div id="game-area" style="display:none;">
 			<div id="room_image" class="room-image-wrapper" style="position:relative;">
-				<button id="left-arrow" style="position:absolute; left:-48px; top:50%; transform:translateY(-50%); background:#222; color:#fff; border-radius:50%; width:40px; height:40px; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8592;</button>
+				
 				
 				<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img">
-				<button id="right-arrow" style="position:absolute; right:-48px; top:50%; transform:translateY(-50%); background:#222; color:#fff; border-radius:50%; width:40px; height:40px; border:none; font-size:2em; cursor:pointer; z-index:2;">&#8594;</button>
+				
 				<div style="margin-top:16px; display:flex; gap:24px; justify-content:center;">
 					<img id="character-img" src="/assets/MargauxLefevre.png" alt="Character" >
 					<img id="item-img" src="/assets/binoculars.png" alt="Item">
 				</div>
 			</div>
-			<div>
-				<h2 id="room-title">Study</h2>
+			<div id="room" style="display:none">
+				<div>
+					<h2 id="room-title">Study</h2>
+				</div>
+				<div class="room-description" id="room-desc">
+					The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.
+				</div>
 			</div>
-			<div class="room-description" id="room-desc">
-				The study is shrouded in shadows. Flickering candlelight reveals a blood-stained letter opener on the desk. The air is thick with secrets and the scent of old books. You feel a chill as if someone—or something—is watching you.
-			</div>
-
-			
 		</div>
-		<!-- Character Modal -->
-		<div id="character-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:32px; border-radius:12px; z-index:1000; min-width:340px;">
-			<div class="modal-content"></div>
+		
+
+		<div id="chat-area" style="display:none;">
 			<div class="modal-chat" id="modal-chat" style="background:rgba(30,30,30,0.85); border-radius:10px; box-shadow:0 0 20px 5px #111; padding:16px; margin:16px 0; max-height:180px; overflow-y:auto; font-size:1em;">
 			lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
@@ -60,6 +65,12 @@
 			<button id="talk-btn" class="submit" style="margin-top:8px; padding:8px 24px;">Say</button>
 			<button id="interrogate-btn" class="submit" style="margin-top:8px; padding:8px 24px;">Interrogate</button>
 			<button class="close-modal" style="margin-top:8px; padding:8px 24px;">Close</button>
+		</div>
+
+		<!-- Character Modal -->
+		<div id="character-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:32px; border-radius:12px; z-index:1000; min-width:340px;">
+			<div class="modal-content"></div>
+		
 		</div>
 	<script src="scripts.js"></script>
 </div>
