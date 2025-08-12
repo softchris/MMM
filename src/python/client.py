@@ -23,16 +23,18 @@ server_params = StdioServerParameters(
     env={},
 )
 
-async def run_tool(tool, args):
+async def run_tool(tool, args, prompt):
     async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
                 # Initialize the connection
                 await session.initialize()
         
-                result = await session.call_tool("talk_to_character", arguments={"name": args["name"]})
-                # print("Result", result)
-                r = call_llm("I'm Detective Depardieu tell me about you", f"You are {result.content[0].text}")
-                return f"\033[1m{args["name"]}\033[0m > {r}"
+                result = await session.call_tool(tool, arguments=args)
+                # result.content[0].text
+                r = call_llm(prompt, f"Answer the question, you are: {result.content[0].text}")
+                return f"{r}"
+
+# can be removed
 async def run():
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
@@ -117,22 +119,22 @@ from flask import request
 async def interrogate():
     data = request.get_json()
     name = data.get("name") if data else None
-    r = await run_tool("talk_to_character", {"name": name})
+    r = await run_tool("interrogate", {"name": name}, f"I'm Detective Depardieu, tell me about yourself.")
+    return jsonify({"status": "ok", "response": r})
+
+@app.route("/talk", methods=["POST"])
+async def talk():
+    data = request.get_json()
+    name = data.get("name") if data else None
+    topic = data.get("topic") if data else None
+    r = await run_tool("talk_to", {"name": name, "topic": topic}, f"I'm Detective Depardieu, tell me about {topic}.")
     return jsonify({"status": "ok", "response": r})
 
 @app.route("/status")
 async def status():
-    r = await run_tool("talk_to_character", {"name": "Henri Duval"})
-    return jsonify({"status": "ok", "response": r})
+    
+    return jsonify({"status": "ok", "response": "running"})
 
-async def main():
-    """Entry point for the client script."""
-    # asyncio.run(run())
-    r = await run_tool("talk_to_character", {"name": "Henri Duval"})
-    print(r)
-    # Madeleine Rousseau
-    r = await run_tool("talk_to_character", {"name": "Madeleine Rousseau"})
-    print(r)
 
 
 if __name__ == "__main__":

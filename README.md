@@ -73,6 +73,10 @@ TIP: you might need to install "mcp[cli]".
 
 - modal broken, needs fixing
 
+- todo: remove chat modal and make that permanent chat to the right
+- todo: make it accept inputs from text box
+
+- todo images for all items and rooms
 - todo: item info, should be resource call
 - todo: make sure the room structure comes from json file only
 - todo: accuse button, accuse person with item, if correct, they confess

@@ -63,12 +63,20 @@ def move_backward() -> str:
     else:
         return f"Already at the first room: {current_room}."
 
-# Add interrogation tool
+# Talk to a character, we learn their name and role
 @mcp.tool()
-def talk_to_character(name: str) -> str:
+def talk_to(name: str, topic: str) -> str:
+   """Talk to a character for information."""
+   c = get_character(name)
+   return f"You are {c.get('name', '')} with role {c.get('role', '')} and tone {c.get('tone', 'neutral')}. Ensure you answer any questions on this {topic}"
+
+# Interrogate a character, we learn their motive
+@mcp.tool()
+def interrogate(name: str) -> str:
    """Interrogate a character for information."""
    c = get_character(name)
-   return f"{c['name']} with {c.get('role', '')} {c.get('tone', 'neutral')} with secret {c.get('secret', '')}"
+   return f"You are {c.get('name', '')} with role {c.get('role', '')} and tone {c.get('tone', 'neutral')}. With {c.get('motive', '')} motive."
+
 
 # Game Actions as MCP tools
 @mcp.resource("look://{room}")

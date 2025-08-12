@@ -7,6 +7,21 @@ BASE_URL = "https://orange-funicular-w5j94w7x7wh6v4-5000.app.github.dev"
 
 let ROOMS = [];
 
+async function talkToCharacter(topic){
+    try {
+        const response = await fetch(`${BASE_URL}/talk`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: ROOMS[currentRoom]["characterName"], topic: topic })
+        });
+        const data = await response.json();
+        return data.response;
+    } catch (error) {
+        console.error("Error talking to character:", error);
+    }
+}
 
 async function interrogateCharacter() {
     try {
@@ -80,6 +95,8 @@ function setupChat(inputId, boxId) {
     const interrogateBtn = getElementId(IDS.INTERROGATE_BTN);
     const chatArea = getElementId(IDS.MODAL_CHAT);
     const chatBox = getElementId(boxId);
+    const talkToBtn = getElementId('talk-btn');
+
     if (chatInput && chatBox) {
         chatInput.addEventListener('keydown', createChatHandler(chatInput, chatBox));
     }
@@ -92,6 +109,20 @@ function setupChat(inputId, boxId) {
             if (spinner) spinner.style.display = 'none';
             chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Interrogation: `+ response);
             // send interrogate to API, render response in chat area
+        });
+    }
+
+    if(talkToBtn) {
+        talkToBtn.addEventListener('click', async function() {
+            const spinner = getElementId('spinner');
+            if (spinner) spinner.style.display = 'block';
+            // todo, get input
+            let topic = "1920s France"
+            const response = await talkToCharacter(topic);
+            if (spinner) spinner.style.display = 'none';
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Detective> ${topic}`);
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Response> ${response}`);
+            // send talkTo to API, render response in chat area
         });
     }
 }
