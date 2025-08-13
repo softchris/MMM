@@ -44,4 +44,12 @@ async function interrogateCharacter() {
     }
 }
 
-export { ROOMS, currentRoom, fetchRooms, talkToCharacter, interrogateCharacter };
+function getRoom() {
+    return currentRoom;
+}
+
+function setRoom(index) {
+    currentRoom = index;
+}
+
+export { ROOMS, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter };

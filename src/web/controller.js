@@ -1,10 +1,11 @@
 // src/web/controller.js
 // Handles event logic and connects model and view
 
-import { ROOMS, currentRoom, fetchRooms, talkToCharacter, interrogateCharacter } from './model.js';
+import { ROOMS, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter } from './model.js';
 import { IDS, getElementId, createChatMessage, showModal } from './view.js';
 
-let roomIndex = 0;
+let roomIndex = getRoom();
+let detectiveSrc = "/assets/detective.png";
 
 function createChatHandler(chatInput, chatBox) {
     return function(e) {
@@ -24,6 +25,10 @@ function setupChat(inputId, boxId) {
     const chatArea = getElementId(IDS.MODAL_CHAT);
     const chatBox = getElementId(boxId);
     const talkToBtn = getElementId('talk-btn');
+    let room = ROOMS[roomIndex];
+    let characterName = room["characterName"];
+    // character-img
+    let characterImg = document.getElementById('character-img');
 
     if (chatInput && chatBox) {
         chatInput.addEventListener('keydown', createChatHandler(chatInput, chatBox));
@@ -33,9 +38,10 @@ function setupChat(inputId, boxId) {
         interrogateBtn.addEventListener('click', async function() {
             const spinner = getElementId('spinner');
             if (spinner) spinner.style.display = 'block';
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> Interrogation`);
             const response = await interrogateCharacter();
             if (spinner) spinner.style.display = 'none';
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Interrogation: `+ response);
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> ${response}`, "character");
         });
     }
 
@@ -43,11 +49,14 @@ function setupChat(inputId, boxId) {
         talkToBtn.addEventListener('click', async function() {
             const spinner = getElementId('spinner');
             if (spinner) spinner.style.display = 'block';
-            let topic = "1920s France";
+            let chatInput = getElementId('modal-chat-input'); 
+            let topic = chatInput.value;
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> ${topic}`);
             const response = await talkToCharacter(topic);
             if (spinner) spinner.style.display = 'none';
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Detective> ${topic}`);
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`Response> ${response}`);
+            chatInput.value = '';
+    
+            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> ${response} `, "character");
         });
     }
 }
@@ -56,7 +65,7 @@ function setupPlayButton(playBtnId) {
     const playBtn = getElementId(playBtnId);
     const playArea = getElementId(IDS.START);
     const gameArea = getElementId(IDS.GAME_AREA);
-    const chatArea = getElementId(IDS.CHAT_AREA);
+    
     const room = getElementId(IDS.ROOM);
     const leftArrow = getElementId('left-arrow');
     const rightArrow = getElementId('right-arrow');
@@ -65,7 +74,7 @@ function setupPlayButton(playBtnId) {
         playBtn.addEventListener('click', function() {
             playArea.style.display = 'none';
             gameArea.style.display = 'flex';
-            chatArea.style.display = 'flex';
+           
             leftArrow.style.display = 'block';
             rightArrow.style.display = 'block';
             room.style.display = 'block';
@@ -97,7 +106,12 @@ function updateRoom() {
             roomDesc.textContent = room["desc"];
             roomTitle.textContent = room["title"];
             modalChat.textContent = "";
-            modalChat.innerHTML = createChatMessage(`Hi, I'm ${room["characterName"]}`);
+            
+            // character-img
+            let characterImg = document.getElementById('character-img');
+            
+
+            modalChat.innerHTML = createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> Hi, I'm ${room["characterName"]} `, "character");
             roomImg.onload = function() {
                 roomImg.style.opacity = '1';
             };
@@ -114,12 +128,14 @@ function setupRoomNavigation() {
     if (leftArrow) {
         leftArrow.onclick = function() {
             roomIndex = (roomIndex - 1 + ROOMS.length) % ROOMS.length;
+            setRoom(roomIndex);
             updateRoom();
         };
     }
     if (rightArrow) {
         rightArrow.onclick = function() {
             roomIndex = (roomIndex + 1) % ROOMS.length;
+            setRoom(roomIndex);
             updateRoom();
         };
     }

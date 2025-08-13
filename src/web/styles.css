@@ -133,11 +133,23 @@ button:hover {
 	box-shadow: 0 0 10px yellow;
 }
 
+.message-img {
+	border-radius: 50%;
+	width: 40px;
+}
+
 .chat-message {
 	box-shadow: 0 0 10px yellow;
     border-radius: 7px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     padding: 5px;
+	font-size: small;
+}
+
+.chat-message.character {
+	background: rgba(100, 100, 160, 0.6);
+	color: #fff;
+	text-align: right;
 }
 
  #item-img {
@@ -164,12 +176,17 @@ button:hover {
 
 .control {
 	position: absolute;
-    top: -54px;
+    bottom: 14px;
+    left: 10px;
 }
 
 #modal-chat {
 	position: absolute;
-	top: 45px;
+    top: 0px;
+    left: 0px;
+	height: 500px;
+	overflow-y: auto;
+	width: 92%;
 }
 
 .room-image {

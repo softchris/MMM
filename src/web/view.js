@@ -24,8 +24,8 @@ function getElementClass(className) {
     return document.getElementsByClassName(className)[0];
 }
 
-function createChatMessage(message) {
-    return `<div class="chat-message">${message}</div>`;
+function createChatMessage(message, className) {
+    return `<div class="chat-message ${className}">${message}</div>`;
 }
 
 function showModal(characterName) {

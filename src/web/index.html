@@ -54,25 +54,20 @@
 				</div>
 			</div>
 		</div>
-		
 
-		<div id="chat-area" style="display:none;">
+		<!-- Character Modal -->
+		<div id="character-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:32px; border-radius:12px; z-index:1000; min-width:340px; height:600px">
+			<div class="modal-content"></div>
 			<div class="modal-chat" id="modal-chat" style="background:rgba(30,30,30,0.85); border-radius:10px; box-shadow:0 0 20px 5px #111; padding:16px; font-size:1em;">
 			lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				
 			</div>
 			<div class="control">
-				<input type="text" class="modal-chat-input" id="modal-chat-input" placeholder="Type your message..." style="width:100%; padding:12px; border-radius:8px; border:none; background:#222; color:#eaeaea; font-size:1em; box-shadow:0 0 10px 2px #111; margin-bottom:8px;">
+				<input type="text" class="modal-chat-input" id="modal-chat-input" placeholder="Type your message..." style="width:80%; padding:12px; border-radius:8px; border:none; background:#222; color:#eaeaea; font-size:1em; box-shadow:0 0 10px 2px #111; margin-bottom:8px;">
 				<button id="talk-btn" class="submit" style="margin-top:8px; padding:8px 24px;">Say</button>
 				<button id="interrogate-btn" class="submit" style="margin-top:8px; padding:8px 24px;">Interrogate</button>
 				<button class="close-modal" style="margin-top:8px; padding:8px 24px;">Close</button>
 			</div>
-		</div>
-
-		<!-- Character Modal -->
-		<div id="character-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:#fff; padding:32px; border-radius:12px; z-index:1000; min-width:340px;">
-			<div class="modal-content"></div>
-		
 		</div>
 	</div>
 	<script type="module">
