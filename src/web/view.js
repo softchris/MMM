@@ -1,0 +1,45 @@
+// src/web/view.js
+// Handles DOM manipulation and UI rendering
+
+const IDS = {
+    CHAT_INPUT: 'chat-input',
+    CHAT_BOX: 'chat-box',
+    PLAY_BTN: 'play-btn',
+    ROOM_DESC: 'room-desc',
+    RIGHT_COLUMN: 'right-column',
+    START: 'start',
+    GAME_AREA: 'game-area',
+    CHARACTER_IMG: 'character-img',
+    MODAL_CHAT: 'modal-chat',
+    INTERROGATE_BTN: 'interrogate-btn',
+    CHAT_AREA: 'chat-area',
+    ROOM: 'room'
+};
+
+function getElementId(id) {
+    return document.getElementById(id);
+}
+
+function getElementClass(className) {
+    return document.getElementsByClassName(className)[0];
+}
+
+function createChatMessage(message) {
+    return `<div class="chat-message">${message}</div>`;
+}
+
+function showModal(characterName) {
+    const modal = document.getElementById('character-modal');
+    if (modal) {
+        modal.querySelector('.modal-content').innerHTML = `<div style="font-size:2em;margin-bottom:16px;">${characterName}</div>`;
+        modal.style.display = 'block';
+        const closeBtn = modal.querySelector('.close-modal');
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            };
+        }
+    }
+}
+
+export { IDS, getElementId, getElementClass, createChatMessage, showModal };
