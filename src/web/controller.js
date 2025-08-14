@@ -1,139 +1,163 @@
 // src/web/controller.js
 // Handles event logic and connects model and view
 
+
 import { ROOMS, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter } from './model.js';
 import { IDS, getElementId, createChatMessage, showModal } from './view.js';
 
 let roomIndex = getRoom();
-let detectiveSrc = "/assets/detective.png";
+const detectiveSrc = "/assets/detective.png";
 
-function createChatHandler(chatInput, chatBox) {
+// --- DOM Elements ---
+const elements = {
+    chatInput: null,
+    interrogateBtn: null,
+    chatArea: null,
+    chatBox: null,
+    talkToBtn: null,
+    characterImg: null,
+    spinner: null,
+    playBtn: null,
+    playArea: null,
+    gameArea: null,
+    room: null,
+    leftArrow: null,
+    rightArrow: null,
+    roomImg: null,
+    roomDesc: null,
+    roomTitle: null,
+    modalChat: null,
+    itemModal: null
+};
+
+function cacheElements() {
+    elements.chatInput = getElementId(IDS.CHAT_INPUT);
+    elements.interrogateBtn = getElementId(IDS.INTERROGATE_BTN);
+    elements.chatArea = getElementId(IDS.MODAL_CHAT);
+    elements.chatBox = getElementId(IDS.CHAT_BOX);
+    elements.talkToBtn = getElementId('talk-btn');
+    elements.characterImg = document.getElementById('character-img');
+    elements.spinner = getElementId('spinner');
+    elements.playBtn = getElementId(IDS.PLAY_BTN);
+    elements.playArea = getElementId(IDS.START);
+    elements.gameArea = getElementId(IDS.GAME_AREA);
+    elements.room = getElementId(IDS.ROOM);
+    elements.leftArrow = getElementId('left-arrow');
+    elements.rightArrow = getElementId('right-arrow');
+    elements.roomImg = document.getElementById('room-img');
+    elements.roomDesc = document.getElementById('room-desc');
+    elements.roomTitle = document.getElementById('room-title');
+    elements.modalChat = getElementId(IDS.MODAL_CHAT);
+    elements.itemModal = getElementId('item-modal');
+}
+
+function createChatHandler() {
     return function(e) {
-        if (e.key === 'Enter' && chatInput.value.trim()) {
+        if (e.key === 'Enter' && elements.chatInput.value.trim()) {
             const msg = document.createElement('div');
-            msg.innerHTML = `<strong>You:</strong> ${chatInput.value}`;
-            chatBox.appendChild(msg);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            chatInput.value = '';
+            msg.innerHTML = `<strong>You:</strong> ${elements.chatInput.value}`;
+            elements.chatBox.appendChild(msg);
+            elements.chatBox.scrollTop = elements.chatBox.scrollHeight;
+            elements.chatInput.value = '';
         }
     };
 }
 
-function setupChat(inputId, boxId) {
-    const chatInput = getElementId(inputId);
-    const interrogateBtn = getElementId(IDS.INTERROGATE_BTN);
-    const chatArea = getElementId(IDS.MODAL_CHAT);
-    const chatBox = getElementId(boxId);
-    const talkToBtn = getElementId('talk-btn');
-    let room = ROOMS[roomIndex];
-    let characterName = room["characterName"];
-    // character-img
-    let characterImg = document.getElementById('character-img');
-
-    if (chatInput && chatBox) {
-        chatInput.addEventListener('keydown', createChatHandler(chatInput, chatBox));
+function setupChat() {
+    if (elements.chatInput && elements.chatBox) {
+        elements.chatInput.addEventListener('keydown', createChatHandler());
     }
 
-    if(interrogateBtn) {
-        interrogateBtn.addEventListener('click', async function() {
-            const spinner = getElementId('spinner');
-            if (spinner) spinner.style.display = 'block';
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> Interrogation`);
+    if (elements.interrogateBtn) {
+        elements.interrogateBtn.addEventListener('click', async function() {
+            if (elements.spinner) elements.spinner.style.display = 'block';
+            elements.chatArea.innerHTML += createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> Interrogation`);
             const response = await interrogateCharacter();
-            if (spinner) spinner.style.display = 'none';
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> ${response}`, "character");
+            if (elements.spinner) elements.spinner.style.display = 'none';
+            elements.chatArea.innerHTML += createChatMessage(`<img class="message-img" src="${elements.characterImg.src}" /> <br/> ${response}`, "character");
         });
     }
 
-    if(talkToBtn) {
-        talkToBtn.addEventListener('click', async function() {
-            const spinner = getElementId('spinner');
-            if (spinner) spinner.style.display = 'block';
-            let chatInput = getElementId('modal-chat-input'); 
-            let topic = chatInput.value;
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> ${topic}`);
+    if (elements.talkToBtn) {
+        elements.talkToBtn.addEventListener('click', async function() {
+            if (elements.spinner) elements.spinner.style.display = 'block';
+            let topic = elements.chatInput.value;
+            elements.chatArea.innerHTML += createChatMessage(`<img src="${detectiveSrc}" class="message-img" /> <br/> ${topic}`);
             const response = await talkToCharacter(topic);
-            if (spinner) spinner.style.display = 'none';
-            chatInput.value = '';
-    
-            chatArea.innerHTML = chatArea.innerHTML + createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> ${response} `, "character");
+            if (elements.spinner) elements.spinner.style.display = 'none';
+            elements.chatInput.value = '';
+            elements.chatArea.innerHTML += createChatMessage(`<img class="message-img" src="${elements.characterImg.src}" /> <br/> ${response} `, "character");
         });
     }
 }
 
-function setupPlayButton(playBtnId) {
-    const playBtn = getElementId(playBtnId);
-    const playArea = getElementId(IDS.START);
-    const gameArea = getElementId(IDS.GAME_AREA);
-    
-    const room = getElementId(IDS.ROOM);
-    const leftArrow = getElementId('left-arrow');
-    const rightArrow = getElementId('right-arrow');
-
-    if (playBtn) {
-        playBtn.addEventListener('click', function() {
-            playArea.style.display = 'none';
-            gameArea.style.display = 'flex';
-           
-            leftArrow.style.display = 'block';
-            rightArrow.style.display = 'block';
-            room.style.display = 'block';
-            setupCharacterClicks(IDS.CHARACTER_IMG);
+function setupPlayButton() {
+    if (elements.playBtn) {
+        elements.playBtn.addEventListener('click', function() {
+            elements.playArea.style.display = 'none';
+            elements.gameArea.style.display = 'flex';
+            elements.leftArrow.style.display = 'block';
+            elements.rightArrow.style.display = 'block';
+            elements.room.style.display = 'block';
+            setupCharacterClicks();
         });
     }
 }
 
-function setupCharacterClicks(chatBoxId) {
-    const chatBox = getElementId(chatBoxId);
-    if (chatBox) {
-        chatBox.onclick = function() {
-            showModal(chatBox.textContent);
+function setupCharacterClicks() {
+    if (elements.characterImg) {
+        elements.characterImg.onclick = function() {
+            showModal(elements.characterImg.textContent);
+        };
+    }
+}
+
+function setupItemClick() {
+    if (elements.itemImg) {
+        elements.itemImg.onclick = function() {
+            let room = ROOMS[roomIndex];
+            // TODOget item based on item name
+            // room.itemName
+            showItemModal();
         };
     }
 }
 
 function updateRoom() {
-    const roomImg = document.getElementById('room-img');
-    const roomDesc = document.getElementById('room-desc');
-    const roomTitle = document.getElementById('room-title');
-    const modalChat = document.getElementById(IDS.MODAL_CHAT);
-    if (roomImg && roomDesc) {
-        roomImg.style.transition = 'opacity 0.2s';
-        roomImg.style.opacity = '0';
+    if (elements.roomImg && elements.roomDesc) {
+        elements.roomImg.style.transition = 'opacity 0.2s';
+        elements.roomImg.style.opacity = '0';
         setTimeout(() => {
             let room = ROOMS[roomIndex];
-            roomImg.src = room["img"];
-            roomDesc.textContent = room["desc"];
-            roomTitle.textContent = room["title"];
-            modalChat.textContent = "";
-            
-            // character-img
-            let characterImg = document.getElementById('character-img');
-            
-
-            modalChat.innerHTML = createChatMessage(`<img class="message-img" src="${characterImg.src}" /> <br/> Hi, I'm ${room["characterName"]} `, "character");
-            roomImg.onload = function() {
-                roomImg.style.opacity = '1';
+            elements.roomImg.src = room.url;
+            elements.roomDesc.textContent = room.description;
+            elements.roomTitle.textContent = room.name;
+            elements.modalChat.textContent = "";
+            elements.characterImg = document.getElementById('character-img');
+            elements.modalChat.innerHTML = createChatMessage(
+                `<img class="message-img" src="${elements.characterImg.src}" /> <br/> Hi, I'm ${room.characterName} `,
+                "character"
+            );
+            elements.roomImg.onload = function() {
+                elements.roomImg.style.opacity = '1';
             };
-            if (roomImg.complete) {
-                roomImg.style.opacity = '1';
+            if (elements.roomImg.complete) {
+                elements.roomImg.style.opacity = '1';
             }
         }, 50);
     }
 }
 
 function setupRoomNavigation() {
-    const leftArrow = document.getElementById('left-arrow');
-    const rightArrow = document.getElementById('right-arrow');
-    if (leftArrow) {
-        leftArrow.onclick = function() {
+    if (elements.leftArrow) {
+        elements.leftArrow.onclick = function() {
             roomIndex = (roomIndex - 1 + ROOMS.length) % ROOMS.length;
             setRoom(roomIndex);
             updateRoom();
         };
     }
-    if (rightArrow) {
-        rightArrow.onclick = function() {
+    if (elements.rightArrow) {
+        elements.rightArrow.onclick = function() {
             roomIndex = (roomIndex + 1) % ROOMS.length;
             setRoom(roomIndex);
             updateRoom();
@@ -142,10 +166,11 @@ function setupRoomNavigation() {
 }
 
 async function setupUI() {
+    cacheElements();
     let rooms = await fetchRooms();
     ROOMS.push(...rooms);
-    setupChat(IDS.CHAT_INPUT, IDS.CHAT_BOX);
-    setupPlayButton(IDS.PLAY_BTN);
+    setupChat();
+    setupPlayButton();
     setupRoomNavigation();
     updateRoom();
 }

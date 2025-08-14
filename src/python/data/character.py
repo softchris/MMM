@@ -4,7 +4,7 @@ from llm import call_llm
 import traceback
 
  # Load characters
-chars_path = os.path.join(os.path.dirname(__file__), '../assets/characters.json')
+chars_path = os.path.join(os.path.dirname(__file__), '../../assets/characters.json')
 
 def get_character(name: str):
     """Get a character by name."""

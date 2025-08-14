@@ -53,5 +53,16 @@
     "guilty": false,
     "item": "Paperweight",
     "clue": "Margaux saw Henri leaving the study moments before the body was found."
+  },
+  {
+    "name": "Kitchen help",
+    "role": "A quiet observer of the household.",
+    "motive": "They wanted to protect their job and keep the peace.",
+    "secret": "They know about the secret passages in the house.",
+    "location": "Kitchen",
+    "tone": "nervous and anxious",
+    "guilty": false,
+    "item": "ChefsKnife",
+    "clue": "They saw someone enter the pantry shortly before the murder."
   }
 ]

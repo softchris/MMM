@@ -2,31 +2,36 @@
     {
         "id": 1,
         "name": "LetterOpener",
-        "description": "Sharp silver blade with an ivory handle.",
-        "location": "Study"
+        "description": "Sharp silver blade with an ivory handle."
     },
     {
         "id": 2,
         "name": "Paperweight",
-        "description": "Marble sphere, surprisingly heavy.",
-        "location": "Study"
+        "description": "Marble sphere, surprisingly heavy."
     },
     {
         "id": 3,
         "name": "LeatherGloves",
-        "description": "Soft black gloves, slightly worn.",
-        "location": "Library"
+        "description": "Soft black gloves, slightly worn."
     },
     {
         "id": 4,
         "name": "ChampagneBottle",
-        "description": "Heavy glass bottle, unopened.",
-        "location": "Cellar"
+        "description": "Heavy glass bottle, unopened."
     },
     {
         "id": 5,
         "name": "OperaGlasses",
-        "description": "Small binoculars with mother-of-pearl inlay.",
-        "location": "Ballroom"
+        "description": "Small binoculars with mother-of-pearl inlay."
+    },
+    {
+        "id": 6,
+        "name": "CrystalBall",
+        "description": "A mysterious crystal orb that reveals hidden truths."
+    },
+    {
+        "id": 7,
+        "name": "ChefsKnife",
+        "description": "A sharp kitchen knife, often used for chopping."
     }
 ]

@@ -16,6 +16,8 @@ async function fetchRooms() {
     }
 }
 
+// TODO, fetchItems
+
 async function talkToCharacter(topic) {
     try {
         const response = await fetch(`${BASE_URL}/talk`, {

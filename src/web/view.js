@@ -2,7 +2,7 @@
 // Handles DOM manipulation and UI rendering
 
 const IDS = {
-    CHAT_INPUT: 'chat-input',
+    CHAT_INPUT: 'modal-chat-input',
     CHAT_BOX: 'chat-box',
     PLAY_BTN: 'play-btn',
     ROOM_DESC: 'room-desc',
@@ -26,6 +26,14 @@ function getElementClass(className) {
 
 function createChatMessage(message, className) {
     return `<div class="chat-message ${className}">${message}</div>`;
+}
+
+function showItemModal() {
+    const itemModal = document.getElementById('item-modal');
+    if (itemModal) {
+        itemModal.style.display = 'block';
+        // populate item text
+    }
 }
 
 function showModal(characterName) {
