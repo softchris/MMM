@@ -2,8 +2,8 @@
 // Handles event logic and connects model and view
 
 
-import { ROOMS, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter } from './model.js';
-import { IDS, getElementId, createChatMessage, showModal } from './view.js';
+import { ROOMS, fetchItem, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter } from './model.js';
+import { IDS, getElementId, createChatMessage, showModal, showItemModal } from './view.js';
 
 let roomIndex = getRoom();
 const detectiveSrc = "/assets/detective.png";
@@ -27,7 +27,8 @@ const elements = {
     roomDesc: null,
     roomTitle: null,
     modalChat: null,
-    itemModal: null
+    itemModal: null,
+    itemUrl: null
 };
 
 function cacheElements() {
@@ -49,6 +50,7 @@ function cacheElements() {
     elements.roomTitle = document.getElementById('room-title');
     elements.modalChat = getElementId(IDS.MODAL_CHAT);
     elements.itemModal = getElementId('item-modal');
+    elements.itemUrl = document.getElementById('item-url');
 }
 
 function createChatHandler() {
@@ -114,11 +116,11 @@ function setupCharacterClicks() {
 
 function setupItemClick() {
     if (elements.itemImg) {
-        elements.itemImg.onclick = function() {
+        elements.itemImg.onclick = async function() {
             let room = ROOMS[roomIndex];
-            // TODOget item based on item name
-            // room.itemName
-            showItemModal();
+            let item = await fetchItem(room.itemName);
+    
+            showItemModal(item.title, item.description, item.url);
         };
     }
 }
@@ -169,6 +171,7 @@ async function setupUI() {
     cacheElements();
     let rooms = await fetchRooms();
     ROOMS.push(...rooms);
+    setupItemClick();
     setupChat();
     setupPlayButton();
     setupRoomNavigation();

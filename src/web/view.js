@@ -28,11 +28,13 @@ function createChatMessage(message, className) {
     return `<div class="chat-message ${className}">${message}</div>`;
 }
 
-function showItemModal() {
+function showItemModal(title, description, url) {
     const itemModal = document.getElementById('item-modal');
     if (itemModal) {
         itemModal.style.display = 'block';
-        // populate item text
+        itemModal.querySelector('#item-title').innerText = title;
+        itemModal.querySelector('.item-content').innerText = description;
+        itemModal.querySelector('#item-img').src = url;
     }
 }
 
@@ -50,4 +52,4 @@ function showModal(characterName) {
     }
 }
 
-export { IDS, getElementId, getElementClass, createChatMessage, showModal };
+export { IDS, showItemModal, getElementId, getElementClass, createChatMessage, showModal };

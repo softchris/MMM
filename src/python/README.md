@@ -23,3 +23,9 @@ This starts the API,
 
 NOTE: Make the port public as well if on GitHub Codespaces.
 
+## run tests
+
+```sh
+pytest
+```
+

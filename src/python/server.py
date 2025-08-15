@@ -70,8 +70,6 @@ def analyze_item(item: str) -> str:
     item = get_item(item)
     return item.get("description", "No significant findings.")
 
-
-
 @mcp.tool()
 def confront_character(name: str) -> str:
     """Confront a character with evidence."""

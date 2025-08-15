@@ -24,7 +24,7 @@
     "name": "Cellar",
     "description": "A dark, damp area beneath the house, rumored to contain a hidden passage and secrets long buried.",
     "url": "/assets/cellar.png",
-    "itemName": "OperaGlasses",
+    "itemName": "Binoculars",
     "characterName": "Henri Duval"
   },
   {
@@ -35,9 +35,16 @@
     "characterName": "Éloise Moreau"
   },
   {
-    "name": "Servants’ Quarters",
+    "name": "ServantsQuarters",
     "description": "A modest section of the house where staff reside, known for eavesdropping and overheard conversations.",
     "url": "/assets/servants_quarters.png",
     "itemName": "CrystalBall"
+  },
+  {
+    "name": "Kitchen",
+    "description": "A bustling kitchen filled with the aroma of spices and the sounds of cooking.",
+    "url": "/assets/kitchen.png",
+    "itemName": "CuttingBoard",
+    "characterName": "Chef Pierre"
   }
 ]

@@ -2,36 +2,43 @@
     {
         "id": 1,
         "name": "LetterOpener",
-        "description": "Sharp silver blade with an ivory handle."
+        "description": "Sharp silver blade with an ivory handle.",
+        "url": "/assets/letter_opener.png"
     },
     {
         "id": 2,
         "name": "Paperweight",
-        "description": "Marble sphere, surprisingly heavy."
+        "description": "Marble sphere, surprisingly heavy.",
+        "url": "/assets/paperweight.png"
     },
     {
         "id": 3,
         "name": "LeatherGloves",
-        "description": "Soft black gloves, slightly worn."
+        "description": "Soft black gloves, slightly worn.",
+        "url": "/assets/leather_gloves.png"
     },
     {
         "id": 4,
         "name": "ChampagneBottle",
-        "description": "Heavy glass bottle, unopened."
+        "description": "Heavy glass bottle, unopened.",
+        "url": "/assets/champagne_bottle.png"
     },
     {
         "id": 5,
-        "name": "OperaGlasses",
-        "description": "Small binoculars with mother-of-pearl inlay."
+        "name": "Binoculars",
+        "description": "Small binoculars with mother-of-pearl inlay.",
+        "url": "/assets/binoculars.png"
     },
     {
         "id": 6,
         "name": "CrystalBall",
-        "description": "A mysterious crystal orb that reveals hidden truths."
+        "description": "A mysterious crystal orb that reveals hidden truths.",
+        "url": "/assets/crystal_ball.png"
     },
     {
         "id": 7,
-        "name": "ChefsKnife",
-        "description": "A sharp kitchen knife, often used for chopping."
+        "name": "CuttingBoard",
+        "description": "A big sturdy cutting board.",
+        "url": "/assets/cutting_board.png"
     }
 ]

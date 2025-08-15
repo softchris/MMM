@@ -6,6 +6,16 @@ const BASE_URL = "https://orange-funicular-w5j94w7x7wh6v4-5000.app.github.dev";
 let ROOMS = [];
 let currentRoom = 0;
 
+async function fetchItem(name) {
+    try {
+        const response = await fetch(`${BASE_URL}/items/${name}`);
+        const data = await response.json();
+        return data.item;
+    } catch (error) {
+        console.error("Error fetching room data:", error);
+    }
+}
+
 async function fetchRooms() {
     try {
         const response = await fetch(`${BASE_URL}/rooms`);
@@ -54,4 +64,4 @@ function setRoom(index) {
     currentRoom = index;
 }
 
-export { ROOMS, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter };
+export { ROOMS, fetchItem, setRoom, getRoom, fetchRooms, talkToCharacter, interrogateCharacter };
