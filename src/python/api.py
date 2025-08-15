@@ -14,6 +14,7 @@ from flask_cors import CORS
 # it shouldn't do this, user mcp server tool call
 from data.room import get_rooms
 from data.item import get_item
+from data.character import get_character
 
 from client import run_tool, read_resource
 
@@ -29,7 +30,9 @@ async def rooms():
 async def interrogate():
     data = request.get_json()
     name = data.get("name") if data else None
-    r = await run_tool("interrogate", {"name": name}, f"I'm Detective Depardieu, tell me about yourself.")
+    c = get_character(name)
+    system_prompt = c.get("systemPrompt") if c else None
+    r = await run_tool("interrogate", {"name": name}, f"I'm Detective Depardieu, this is an interrogation, what do you know about the murder, was it you?", system_prompt)
     return jsonify({"status": "ok", "response": r})
 
 @app.route("/talk", methods=["POST"])
@@ -37,8 +40,15 @@ async def talk():
     data = request.get_json()
     name = data.get("name") if data else None
     topic = data.get("topic") if data else None
-    r = await run_tool("talk_to", {"name": name, "topic": topic}, f"I'm Detective Depardieu, tell me about {topic}.")
+    c = get_character(name)
+    system_prompt = c.get("systemPrompt") if c else None
+    r = await run_tool("talk_to", {"name": name, "topic": topic}, f"I'm Detective Depardieu, tell me about {topic}.", system_prompt)
     return jsonify({"status": "ok", "response": r})
+
+@app.route("/characters/<name>", methods=["GET"])
+async def character(name):
+    c = get_character(name)
+    return jsonify({"status": "ok", "character": c})
 
 @app.route("/items/<name>", methods=["POST"])
 async def item(name):

@@ -6,20 +6,98 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Murder Mystery Mansion</title>
 	<link rel="stylesheet" href="styles.css">
-	</style>
+	<link rel="stylesheet" href="prison-bars.css">
 	<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     
 	<div class="container">
-		<div class="title">
+		<div class="title" >
 			<div class="spooky">Murder Mystery Mansion</div>
 			<div class="subtitle">An MCP Adventure</div>
 		</div>
 		<div id="start" class="room-image-wrapper">
-			<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img-intro">
-			<button id="play-btn" class="play-btn">▶</button>
+			<div style="display: flex; justify-content: center; align-items: center;">
+				<img src="/assets/study.png" alt="Current Room" class="room-image" id="room-img-intro">
+				<button id="play-btn" class="play-btn">▶</button>
+			</div>
 			<div class="step-in">step in</div>
+
+			<div class="character-gallery" style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center; margin-top:110px;">
+				<!-- Character cards will be dynamically generated here -->
+			</div>
+			<script>
+			const characterGallery = document.querySelector('.character-gallery');
+			const characters = [
+				{ name: "Margaux", img: "/assets/characters/margaux.png" },
+				{ name: "Eloise", img: "/assets/characters/eloise.png" },
+				{ name: "Henri", img: "/assets/characters/henri.png" },
+				{ name: "Julien", img: "/assets/characters/julien.png" },
+				{ name: "Madeleine", img: "/assets/characters/madeleine.png" },
+				{ name: "Pierre", img: "/assets/characters/pierre.png" },
+				{ name: "Lucien", img: "/assets/characters/lucien.png" },
+			];
+
+			characters.forEach(char => {
+				const card = document.createElement('div');
+				card.style.background = 'rgba(34,34,34,0.92)';
+				card.style.borderRadius = '14px';
+				card.style.boxShadow = '0 4px 24px #111';
+				card.style.padding = '18px 16px 10px 16px';
+				card.style.display = 'flex';
+				card.style.flexDirection = 'column';
+				card.style.alignItems = 'center';
+				card.style.width = '140px';
+				card.style.transition = 'transform 0.2s';
+				card.onmouseover = () => card.style.transform = 'scale(1.06)';
+				card.onmouseout = () => card.style.transform = 'scale(1)';
+
+				// Wrapper for image and overlay
+				const wrapper = document.createElement('div');
+				wrapper.className = 'gallery-img-wrapper';
+				wrapper.style.width = '90px';
+				wrapper.style.height = '90px';
+				wrapper.style.position = 'relative';
+
+				const img = document.createElement('img');
+				img.src = char.img;
+				img.alt = char.name;
+				img.style.width = '90px';
+				img.style.height = '90px';
+				img.style.objectFit = 'contain';
+				img.style.borderRadius = '50%';
+				img.style.border = '3px solid #eaeaea';
+				img.style.marginBottom = '12px';
+
+				const overlay = document.createElement('img');
+				overlay.src = '/assets/prison-bars.svg';
+				overlay.className = 'prison-bars-overlay';
+				overlay.style.borderRadius = '50%';
+
+				wrapper.appendChild(img);
+				wrapper.appendChild(overlay);
+
+				// Show overlay on hover
+				wrapper.addEventListener('mouseenter', () => {
+					overlay.style.display = 'block';
+				});
+				wrapper.addEventListener('mouseleave', () => {
+					overlay.style.display = 'none';
+				});
+
+				const name = document.createElement('div');
+				name.textContent = char.name;
+				name.style.fontFamily = "'Cinzel', serif";
+				name.style.fontWeight = '700';
+				name.style.fontSize = '1.1em';
+				name.style.color = '#fff';
+				name.style.textAlign = 'center';
+
+				card.appendChild(wrapper);
+				card.appendChild(name);
+				characterGallery.appendChild(card);
+			});
+			</script>
 		</div>
 
 		<div id="spinner" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2000;">

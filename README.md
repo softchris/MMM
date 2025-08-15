@@ -72,18 +72,17 @@ TIP: you might need to install "mcp[cli]".
 ## TODO 
 
 
-- todo images for all items and rooms
-- todo: item info vertical, should be resource call
-- todo, change character image when changing room
-
-- todo: make sure the room structure comes from json file only
 - todo: accuse button, accuse person with item, if correct, they confess
 if incorrect, they will give angry response
 items can only be selected from list
 todo: display clue, for a room if character has a clue
+  o when an item is selected, you can select to pick them up
+  o create an inventory of items
+  o if you click "accuse" your list of inventory items should be shown
+  o if guilty person + correct murder weapon is combined then you will get confession
 
-  o should keep track of items we discover per room
+- preload all assets before game starts
+- create mini images of people and items
 
-- accuse, should take character + item as input, the right combination should get the killer to confess (if they are guilty, otherwise deny)
-   o if wrong combination, then tell their secret
-- characters should answer with LLM responses
+- can we add animations in places
+- can we add a list of characters to the starter page?

@@ -56,9 +56,13 @@ body {
 /* Two column layout for game area */
 
 .title {
-	grid-row: 1;
-	grid-column: 1 / span 2;
 	text-align: center;
+	position: absolute;
+    top: 91px;
+    z-index: 1;
+    left: 0px;
+    background: rgb(0, 0, 0, 0.5);
+    width: 100%;
 }
 
 #game-area {
@@ -274,12 +278,12 @@ button:hover {
 }
 .step-in {
 	position: absolute;
-	top: 70%;
-	left: 50%;
-	transform: translate(-50%, 0);
-	font-size: 2em;
-	color: #eaeaea;
-	text-shadow: 0 0 10px #ff2e63;
-	font-family: 'Cinzel', serif;
-	z-index: 2;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 2em;
+    color: #eaeaea;
+    text-shadow: 0 0 10px #ff2e63;
+    font-family: 'Cinzel', serif;
+    z-index: 2;
 }

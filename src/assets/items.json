@@ -3,42 +3,49 @@
         "id": 1,
         "name": "LetterOpener",
         "description": "Sharp silver blade with an ivory handle.",
-        "url": "/assets/letter_opener.png"
+        "url": "/assets/letter_opener.png",
+        "murderWeapon": true
     },
     {
         "id": 2,
         "name": "Paperweight",
         "description": "Marble sphere, surprisingly heavy.",
-        "url": "/assets/paperweight.png"
+        "url": "/assets/paperweight.png",
+        "murderWeapon": false
     },
     {
         "id": 3,
         "name": "LeatherGloves",
         "description": "Soft black gloves, slightly worn.",
-        "url": "/assets/leather_gloves.png"
+        "url": "/assets/leather_gloves.png",
+        "murderWeapon": false
     },
     {
         "id": 4,
         "name": "ChampagneBottle",
         "description": "Heavy glass bottle, unopened.",
-        "url": "/assets/champagne_bottle.png"
+        "url": "/assets/champagne_bottle.png",
+        "murderWeapon": false
     },
     {
         "id": 5,
         "name": "Binoculars",
         "description": "Small binoculars with mother-of-pearl inlay.",
-        "url": "/assets/binoculars.png"
+        "url": "/assets/binoculars.png",
+        "murderWeapon": false
     },
     {
         "id": 6,
         "name": "CrystalBall",
         "description": "A mysterious crystal orb that reveals hidden truths.",
-        "url": "/assets/crystal_ball.png"
+        "url": "/assets/crystal_ball.png",
+        "murderWeapon": false
     },
     {
         "id": 7,
         "name": "CuttingBoard",
         "description": "A big sturdy cutting board.",
-        "url": "/assets/cutting_board.png"
+        "url": "/assets/cutting_board.png",
+        "murderWeapon": false
     }
 ]

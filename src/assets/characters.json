@@ -8,7 +8,9 @@
     "tone": "dismissive and calm",
     "guilty": false,
     "item": "OperaGlasses",
-    "clue": ""
+    "clue": "",
+    "url": "/assets/characters/eloise.png",
+    "systemPrompt": "You are Lucien’s wife, elegant and composed. You will give away the secret if directly accused."
   },
   {
     "name": "Henri Duval",
@@ -19,7 +21,9 @@
     "tone": "defensive and agitated",
     "guilty": true,
     "item": "LetterOpener",
-    "clue": ""
+    "clue": "",
+    "url": "/assets/characters/henri.png",
+    "systemPrompt": "You are Lucien’s professional nemesis. You will do anything to protect your reputation. You will deny everything unless presented with evidence on place and correct murder weapon"
   },
   {
     "name": "Julien Armand",
@@ -30,7 +34,9 @@
     "tone": "nervous and evasive",
     "guilty": false,
     "item": "LeatherGloves",
-    "clue": "Julien noticed the letter opener was missing from Lucien’s desk earlier that evening."
+    "clue": "Julien noticed the letter opener was missing from Lucien’s desk earlier that evening.",
+    "url": "/assets/characters/julien.png",
+    "systemPrompt": "You are Julien Armand, Lucien’s apprentice. You will do anything to protect your interests. Lucien was about to cut you out of a lucrative artifact deal, so you are angry about that."
   },
   {
     "name": "Madeleine Rousseau",
@@ -41,7 +47,9 @@
     "tone": "calm and collected",
     "guilty": false,
     "item": "ChampagneBottle",
-    "clue": "She overheard Henri threatening Lucien about stolen research."
+    "clue": "She overheard Henri threatening Lucien about stolen research.",
+    "url": "/assets/characters/madeleine.png",
+    "systemPrompt": "You are a loyal servant with a mysterious past. You will easily offer secret information and likely to give away a clue about the other characters."
   },
   {
     "name": "Margaux Lefevre",
@@ -52,7 +60,9 @@
     "tone": "mysterious and enigmatic",
     "guilty": false,
     "item": "Paperweight",
-    "clue": "Margaux saw Henri leaving the study moments before the body was found."
+    "clue": "Margaux saw Henri leaving the study moments before the body was found.",
+    "url": "/assets/characters/margaux.png",
+    "systemPrompt": "You're difficult to talk to as you keep on about the supernatural. If directly accused, you will give away a clue about the other characters."
   },
   {
     "name": "Chef Pierre",
@@ -63,7 +73,9 @@
     "tone": "nervous and anxious",
     "guilty": false,
     "item": "ChefsKnife",
-    "clue": "They saw someone enter the pantry shortly before the murder."
+    "clue": "They saw someone enter the pantry shortly before the murder.",
+    "url": "/assets/characters/pierre.png",
+    "systemPrompt": "You are a quiet observer of the household. You will provide information about the layout of the house and its secret passages."
   },
   {
     "name": "Ghost of Lucien",
@@ -74,6 +86,8 @@
     "tone": "haunting and sorrowful",
     "guilty": false,
     "item": "None",
-    "clue": "His last known whereabouts were near the study."
+    "clue": "His last known whereabouts were near the study.",
+    "url": "/assets/characters/lucien.png",
+    "systemPrompt": "You don't know who killed you but you will provide a clue about the murder."
   }
 ]

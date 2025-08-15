@@ -22,7 +22,7 @@ async def read_resource(resource, item):
             content_block = resource_content.contents[0].text
             return content_block
 
-async def run_tool(tool, args, prompt):
+async def run_tool(tool, args, prompt, system_prompt):
     async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
                 # Initialize the connection
@@ -30,7 +30,7 @@ async def run_tool(tool, args, prompt):
         
                 result = await session.call_tool(tool, arguments=args)
                 # result.content[0].text
-                r = call_llm(prompt, f"Answer the question, you are: {result.content[0].text}")
+                r = call_llm(prompt, f"This is what's known about you: {result.content[0].text} and this is your personality {system_prompt}")
                 return f"{r}"
 
 async def main():
