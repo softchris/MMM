@@ -34,7 +34,14 @@ function showItemModal(title, description, url) {
         itemModal.style.display = 'block';
         itemModal.querySelector('#item-title').innerText = title;
         itemModal.querySelector('.item-content').innerText = description;
-        itemModal.querySelector('#item-img').src = url;
+        itemModal.querySelector('#item-url').src = url;
+
+        const closeBtn = itemModal.querySelector('.close-modal');
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                itemModal.style.display = 'none';
+            };
+        }
     }
 }
 

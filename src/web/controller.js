@@ -127,7 +127,7 @@ function setupItemClick() {
 
 function updateRoom() {
     if (elements.roomImg && elements.roomDesc) {
-        elements.roomImg.style.transition = 'opacity 0.2s';
+        elements.roomImg.style.transition = 'opacity 0.7s';
         elements.roomImg.style.opacity = '0';
         setTimeout(() => {
             let room = ROOMS[roomIndex];

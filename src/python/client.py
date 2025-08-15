@@ -19,7 +19,7 @@ async def read_resource(resource, item):
             await session.initialize()
 
             resource_content = await session.read_resource(AnyUrl(f"{resource}://{item}"))
-            content_block = resource_content.contents[0]
+            content_block = resource_content.contents[0].text
             return content_block
 
 async def run_tool(tool, args, prompt):
@@ -34,7 +34,7 @@ async def run_tool(tool, args, prompt):
                 return f"{r}"
 
 async def main():
-    result = await read_resource("lookat", "OperaGlasses")
+    result = await read_resource("lookat", "Binoculars")
     print(result)
 
 if __name__ == "__main__":

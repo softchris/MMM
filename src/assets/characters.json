@@ -64,5 +64,16 @@
     "guilty": false,
     "item": "ChefsKnife",
     "clue": "They saw someone enter the pantry shortly before the murder."
+  },
+  {
+    "name": "Ghost of Lucien",
+    "role": "The victim, a renowned art dealer.",
+    "motive": "Unknown, but his death has caused a stir in the art world.",
+    "secret": "He was involved in illegal art dealings.",
+    "location": "Unknown",
+    "tone": "haunting and sorrowful",
+    "guilty": false,
+    "item": "None",
+    "clue": "His last known whereabouts were near the study."
   }
 ]

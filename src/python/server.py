@@ -56,7 +56,6 @@ def interrogate(name: str) -> str:
    c = get_character(name)
    return f"You are {c.get('name', '')} with role {c.get('role', '')} and tone {c.get('tone', 'neutral')}. With {c.get('motive', '')} motive."
 
-
 # Game Actions as MCP tools
 @mcp.resource("look://{room}")
 def search_room(room: str) -> str:

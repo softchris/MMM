@@ -13,6 +13,7 @@ from flask_cors import CORS
 
 # it shouldn't do this, user mcp server tool call
 from data.room import get_rooms
+from data.item import get_item
 
 from client import run_tool, read_resource
 
@@ -39,12 +40,11 @@ async def talk():
     r = await run_tool("talk_to", {"name": name, "topic": topic}, f"I'm Detective Depardieu, tell me about {topic}.")
     return jsonify({"status": "ok", "response": r})
 
-@app.route("/item/<name>", methods=["POST"])
+@app.route("/items/<name>", methods=["POST"])
 async def item(name):
 
-    # todo, call resource
-    item = await read_resource("lookat", name)
-    return jsonify({"status": "ok", "item": item})
+    i = get_item(name)
+    return jsonify({"status": "ok", "item": i})
 
 @app.route("/status")
 async def status():

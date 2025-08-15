@@ -8,7 +8,11 @@ let currentRoom = 0;
 
 async function fetchItem(name) {
     try {
-        const response = await fetch(`${BASE_URL}/items/${name}`);
+        const response = await fetch(`${BASE_URL}/items/${name}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name })
+        });
         const data = await response.json();
         return data.item;
     } catch (error) {
