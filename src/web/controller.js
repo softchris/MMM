@@ -28,7 +28,8 @@ const elements = {
     roomTitle: null,
     modalChat: null,
     itemModal: null,
-    itemUrl: null
+    itemUrl: null,
+    itemImg: null
 };
 
 function cacheElements() {
@@ -51,6 +52,7 @@ function cacheElements() {
     elements.modalChat = getElementId(IDS.MODAL_CHAT);
     elements.itemModal = getElementId('item-modal');
     elements.itemUrl = document.getElementById('item-url');
+    elements.itemImg = document.getElementById('item-img');
 }
 
 function createChatHandler() {
@@ -118,9 +120,7 @@ function setupItemClick() {
     if (elements.itemImg) {
         elements.itemImg.onclick = async function() {
             let room = ROOMS[roomIndex];
-            let item = await fetchItem(room.itemName);
-    
-            showItemModal(item.title, item.description, item.url);
+            showItemModal(room.itemName, room.itemDescription, room.itemUrl);
         };
     }
 }
@@ -140,6 +140,9 @@ function updateRoom() {
                 `<img class="message-img" src="${elements.characterImg.src}" /> <br/> Hi, I'm ${room.characterName} `,
                 "character"
             );
+            elements.itemImg.src = room.itemUrl;
+            elements.itemImg.alt = room.itemName;
+
             elements.roomImg.onload = function() {
                 elements.roomImg.style.opacity = '1';
             };
@@ -167,10 +170,19 @@ function setupRoomNavigation() {
     }
 }
 
-async function setupUI() {
-    cacheElements();
+async function setupRooms(){
     let rooms = await fetchRooms();
     ROOMS.push(...rooms);
+    for (let room of ROOMS) {
+        let item = await fetchItem(room.itemName);
+        room.itemUrl = item.url;
+        room.itemDescription = item.description;
+    }
+}
+
+async function setupUI() {
+    cacheElements();
+    await setupRooms();
     setupItemClick();
     setupChat();
     setupPlayButton();
