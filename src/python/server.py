@@ -9,7 +9,9 @@ import json
 from mcp.server.fastmcp import FastMCP
 from data.character import get_character
 from data.room import get_room, move_room
+
 from data import room
+from data.item import get_item
 
 # Create an MCP server for the mystery game
 mcp = FastMCP("MMM Mystery Game")
@@ -65,16 +67,8 @@ def search_room(room: str) -> str:
 @mcp.resource("lookat://{item}")
 def analyze_item(item: str) -> str:
     """Analyze the specified item for clues."""
-    
-    try:
-        with open(items_path, 'r') as f:
-            items = json.load(f)
-        for obj in items:
-            if obj["name"].lower() == item.lower():
-                return obj["description"]
-    except Exception as e:
-        return f"Error reading items: {e}"
-    return "No significant findings."
+    item = get_item(item)
+    return item.get("description", "No significant findings.")
 
 
 

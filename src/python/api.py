@@ -7,8 +7,6 @@ import asyncio
 import os
 import json
 
-from pydantic import AnyUrl
-
 from flask import Flask, jsonify
 from flask import request
 from flask_cors import CORS
@@ -38,6 +36,10 @@ async def talk():
     topic = data.get("topic") if data else None
     r = await run_tool("talk_to", {"name": name, "topic": topic}, f"I'm Detective Depardieu, tell me about {topic}.")
     return jsonify({"status": "ok", "response": r})
+
+@app.route("/item", methods=["POST"])
+async def item():
+    pass
 
 @app.route("/status")
 async def status():

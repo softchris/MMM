@@ -1,7 +1,7 @@
 import os
 import json
 
-items_path = os.path.join(os.path.dirname(__file__), '../assets/items.json')
+items_path = os.path.join(os.path.dirname(__file__), '../../assets/items.json')
 
 def get_item(name: str) -> dict:
     """Retrieve an item by name."""
